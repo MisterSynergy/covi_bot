@@ -1,0 +1,35 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: msynbot.covibot
+  labels:
+    name: msynbot.covibot
+    # The toolforge=tool label will cause $HOME and other paths to be mounted from Toolforge
+    toolforge: tool
+spec:
+  schedule: "42 7 * * *"
+  successfulJobsHistoryLimit: 0
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            toolforge: tool
+        spec:
+          containers:
+          - name: covibot
+            image: docker-registry.tools.wmflabs.org/toolforge-python39-sssd-base:latest
+            resources:
+              requests:
+                memory: "100Mi"
+                cpu: "100m"
+              limits:
+                memory: "200Mi"
+                cpu: "100m"
+            command: [ "/data/project/msynbot/pywikibot_tasks/covi_bot/venv/bin/python3" ]
+            args: [ "/data/project/shared/pywikibot/stable/pwb.py", "/data/project/msynbot/pywikibot_tasks/covi_bot/main.py" ]
+            workingDir: /data/project/msynbot/pywikibot_tasks/covi_bot
+            env:
+            - name: HOME
+              value: /data/project/msynbot
+          restartPolicy: Never
