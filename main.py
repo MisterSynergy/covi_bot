@@ -19,10 +19,14 @@ def print_report(constraint:Constraint) -> None:
 
 
 def main() -> None:
-    prop = 'P227'
+    properties = {
+        'P227' : [ SingleBestValueConstraint ]
+    }
 
-    sbv_constraint = SingleBestValueConstraint(prop)
-    write_to_wiki(sbv_constraint)
+    for prop, constraints in properties.items():
+        for constraint_class in constraints:
+            constraint = constraint_class(prop)
+            write_to_wiki(constraint)
 
 
 if __name__=='__main__':
