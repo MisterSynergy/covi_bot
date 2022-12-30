@@ -180,7 +180,7 @@ class SingleBestValueConstraint:
                 separator_saves += 1
                 continue
 
-            identifiers = subset['identifier'].tolist()
+            identifiers = sorted(subset['identifier'].tolist())
             identifiers_linked = [ f'[{self.formatter.replace("$1", identifier)} {identifier}]' for identifier in identifiers ]
 
             report_lines.append(f'# {{{{Q|{item}}}}}: {", ".join(identifiers_linked)}')
