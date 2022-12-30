@@ -20,7 +20,9 @@ def print_report(constraint:Constraint) -> None:
 
 def main() -> None:
     properties = {
-        'P227' : [ SingleBestValueConstraint ]
+        'P227' : [
+            SingleBestValueConstraint,
+        ]
     }
 
     for prop, constraints in properties.items():
