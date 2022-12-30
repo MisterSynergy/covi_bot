@@ -51,12 +51,12 @@ class SingleBestValueConstraint:
 
         self.query_formatter()
         self.query_separators()
-        
+
         self.query = self.query_template.format(
             prop=self.prop,
             separators=' pq:'.join(self.separators)
         )
-        
+
         self.query_violations()
 
     def query_formatter(self) -> None:
