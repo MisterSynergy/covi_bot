@@ -26,10 +26,12 @@ spec:
               limits:
                 memory: "200Mi"
                 cpu: "100m"
-            command: [ "/data/project/msynbot/pywikibot_tasks/covi_bot/venv/bin/python3" ]
-            args: [ "/data/project/shared/pywikibot/stable/pwb.py", "/data/project/msynbot/pywikibot_tasks/covi_bot/main.py" ]
-            workingDir: /data/project/msynbot/pywikibot_tasks/covi_bot
             env:
             - name: HOME
               value: /data/project/msynbot
-          restartPolicy: Never
+            - name: PYTHONPATH
+              value: /data/project/shared/pywikibot/stable
+            workingDir: /data/project/msynbot/pywikibot_tasks/covi_bot
+            command: [ "venv/bin/python3" ]
+            args: [ "main.py" ]
+            restartPolicy: Never
