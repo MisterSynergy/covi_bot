@@ -34,4 +34,4 @@ spec:
             workingDir: /data/project/msynbot/pywikibot_tasks/covi_bot
             command: [ "venv/bin/python3" ]
             args: [ "main.py" ]
-            restartPolicy: Never
+          restartPolicy: Never
