@@ -10,6 +10,7 @@ class Constraint(Protocol):
 
     # fields to explicitly initialize
     prop : str
+    report_header_extras : list[str]  # empty list when omitted during init
 
     # fields used after initializiation
     report_page : str

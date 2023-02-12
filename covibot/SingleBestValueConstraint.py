@@ -1,5 +1,6 @@
 from io import StringIO
 from time import perf_counter
+from typing import Optional
 
 import pandas as pd
 import requests
@@ -38,6 +39,7 @@ class SingleBestValueConstraint:
     prop : str
     query : str
     report_page : str
+    report_header_extras : list[str]  # allows custom headers to be used
 
     violations : pd.DataFrame
     query_time : float
@@ -45,9 +47,14 @@ class SingleBestValueConstraint:
     formatter : str
     separators : list[str]
 
-    def __init__(self, prop:str) -> None:
+    def __init__(self, prop:str, *, report_header_extras:Optional[list[str]]=None) -> None:
         self.prop = prop
         self.report_page = self.report_page_template.format(prop=self.prop)
+
+        if report_header_extras is None:
+            self.report_header_extras = []
+        else:
+            self.report_header_extras = report_header_extras
 
         self.query_formatter()
         self.query_separators()
@@ -191,4 +198,4 @@ class SingleBestValueConstraint:
             f'Violations count: {len(items)-separator_saves} items',
         ]
 
-        return '\n'.join([ *report, *report_lines ])
+        return '\n'.join([ *self.report_header_extras, *report, *report_lines ])
