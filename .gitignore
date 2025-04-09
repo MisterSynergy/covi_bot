@@ -1,4 +1,5 @@
 venv/
 main_P227.py
+covibot/SingleBestValueConstraintP227AllHumans.py
 covibot/SingleBestValueConstraintP227OldHumans.py
 *.pyc
